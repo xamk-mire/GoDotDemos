@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvxxdscqoe4vs"]
+
+[ext_resource type="Script" uid="uid://dg50j0yynnwom" path="res://scripts/HUD.gd" id="1_qpvh6"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_qpvh6")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 46.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="CoinsLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "Coins"
+
+[node name="InfoLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "Info"
+horizontal_alignment = 2

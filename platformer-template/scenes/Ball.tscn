@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bv0lfmvua7kdl"]
+
+[ext_resource type="Texture2D" uid="uid://c25yd3qtxjlwq" path="res://tiles/pixel-ball.png" id="1_d73vv"]
+[ext_resource type="Script" uid="uid://5v518fxfss66" path="res://scripts/Ball.gd" id="1_ja1hk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cxlvu"]
+radius = 5.0
+
+[node name="Ball" type="RigidBody2D" groups=["ball"]]
+collision_layer = 4
+collision_mask = 3
+mass = 0.534
+continuous_cd = 2
+linear_damp_mode = 1
+linear_damp = 0.4
+angular_damp_mode = 1
+angular_damp = 0.2
+script = ExtResource("1_ja1hk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(-0.015, -0.015)
+texture = ExtResource("1_d73vv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cxlvu")

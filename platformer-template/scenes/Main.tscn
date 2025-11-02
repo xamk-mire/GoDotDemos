@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://diop8xh5woxtp"]
+
+[ext_resource type="Script" uid="uid://bxdplp438txk5" path="res://scripts/Main.gd" id="1_elqb8"]
+[ext_resource type="PackedScene" uid="uid://78qm4h6yf2e3" path="res://levels/Level01.tscn" id="2_rarhs"]
+[ext_resource type="PackedScene" uid="uid://dqe16ldujmcnr" path="res://scenes/Player.tscn" id="2_rvslj"]
+[ext_resource type="PackedScene" uid="uid://dvxxdscqoe4vs" path="res://scenes/HUD.tscn" id="3_0bbpv"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_elqb8")
+
+[node name="Level" parent="." instance=ExtResource("2_rarhs")]
+
+[node name="Player" parent="." instance=ExtResource("2_rvslj")]
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(3, 3)
+limit_smoothed = true
+metadata/Current = true
+
+[node name="HUD" parent="." instance=ExtResource("3_0bbpv")]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwlsdpdmrkkyk"]
+
+[ext_resource type="Script" uid="uid://b7fib7fn2046o" path="res://scripts/Goal.gd" id="1_grq7m"]
+[ext_resource type="Texture2D" uid="uid://c5m1fl7uaihbq" path="res://tiles/placeholder_tile.png" id="2_sos67"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3id6j"]
+atlas = ExtResource("2_sos67")
+region = Rect2(17, 33, 14, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8hb4r"]
+size = Vector2(14, 14)
+
+[node name="Goal" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_grq7m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_3id6j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8hb4r")

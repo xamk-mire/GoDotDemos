@@ -1,26 +1,62 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvxxdscqoe4vs"]
+[gd_scene load_steps=4 format=3 uid="uid://dvxxdscqoe4vs"]
 
 [ext_resource type="Script" uid="uid://dg50j0yynnwom" path="res://scripts/HUD.gd" id="1_qpvh6"]
+[ext_resource type="FontFile" uid="uid://ba1dk3xekiboq" path="res://fonts/LowGothic_8x10_Regular.ttf" id="2_fls4u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fls4u"]
+bg_color = Color(0.28785047, 0.29532254, 0.4810922, 1)
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_qpvh6")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Panel" type="Panel" parent="."]
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 46.0
+offset_bottom = 43.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fls4u")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 1.0
+offset_top = 5.0
+offset_right = 39.0
+offset_bottom = 39.0
 grow_horizontal = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="CoinsContainer" type="HBoxContainer" parent="Panel/MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
-[node name="CoinsLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="CoinsLabel" type="Label" parent="Panel/MarginContainer/CoinsContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fls4u")
 theme_override_font_sizes/font_size = 33
 text = "Coins"
 
-[node name="InfoLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="InfoContainer" type="HBoxContainer" parent="Panel/MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="InfoLabel" type="Label" parent="Panel/MarginContainer/InfoContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fls4u")
 theme_override_font_sizes/font_size = 33
 text = "Info"
+horizontal_alignment = 2
+
+[node name="LivesContainer" type="HBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="LivesLabel" type="Label" parent="Panel/MarginContainer/LivesContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fls4u")
+theme_override_font_sizes/font_size = 33
+text = "Lives"
 horizontal_alignment = 2

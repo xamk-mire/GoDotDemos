@@ -1,31 +1,26 @@
 extends Node
 
 signal coins_changed(count: int)
-signal player_died(lives_left: int)
-signal level_completed(time_sec: float)
+signal lives_changed(lives_left: int)
+signal player_respawn(spawn_position: Vector2)
+signal game_over()
 
-var coins: int = 0
-var lives: int = 3
-var spawn_position: Vector2 = Vector2.ZERO
-var level_time: float = 0.0
-var timer_running := false
+var coins := 0
+var max_lives := 3
+var lives := max_lives
+var spawn_position := Vector2.ZERO
 
 
-func _process(delta: float) -> void:
-	if timer_running:
-		level_time += delta
+func new_game() -> void:
+	coins = 0
+	lives = max_lives
+	emit_signal("coins_changed", coins)
+	emit_signal("lives_changed", lives)
 
 
 func reset_for_level(spawn: Vector2) -> void:
 	coins = 0
-	level_time = 0.0
 	spawn_position = spawn
-	timer_running = true
-	emit_signal("coins_changed", coins)
-
-
-func add_coin(amount: int = 1) -> void:
-	coins += amount
 	emit_signal("coins_changed", coins)
 
 
@@ -33,11 +28,17 @@ func set_spawn(pos: Vector2) -> void:
 	spawn_position = pos
 
 
-func on_player_death() -> void:
+func add_coin(amount: int = 1) -> void:
+	coins += amount
+	emit_signal("coins_changed", coins)
+
+
+func damage_player() -> void:
+	if lives <= 0:
+		return
 	lives -= 1
-	emit_signal("player_died", lives)
-
-
-func complete_level() -> void:
-	timer_running = false
-	emit_signal("level_completed", level_time)
+	emit_signal("lives_changed", lives)
+	if lives > 0:
+		emit_signal("player_respawn", spawn_position)
+	else:
+		emit_signal("game_over")

@@ -1,24 +1,22 @@
 extends CanvasLayer
 
-@onready var coins_label: Label = $"MarginContainer/HBoxContainer/CoinsLabel"
-@onready var info_label: Label = $"MarginContainer/HBoxContainer/InfoLabel"
+@onready var coins_label: Label = $"Panel/MarginContainer/CoinsContainer/CoinsLabel"
+@onready var info_label: Label = $"Panel/MarginContainer/InfoContainer/InfoLabel"
+@onready var lives_label: Label = $"Panel/MarginContainer/LivesContainer/LivesLabel"
 
 
 func _ready() -> void:
-	coins_label.text = "Coins: 0"
-	info_label.text = ""
 	Game.coins_changed.connect(_on_coins_changed)
-	Game.player_died.connect(_on_player_died)
-	Game.level_completed.connect(_on_level_completed)
+	Game.lives_changed.connect(_on_lives_changed)
 
 
 func _on_coins_changed(count: int) -> void:
 	coins_label.text = "Coins: %d" % count
 
 
-func _on_player_died(lives_left: int) -> void:
-	info_label.text = "Ouch! Lives: %d" % lives_left
+func _on_lives_changed(lives_left: int) -> void:
+	lives_label.text = "Lives: %d" % lives_left
 
 
-func _on_level_completed(time_sec: float) -> void:
-	info_label.text = "Level complete! Time: %.2f s" % time_sec
+func show_message(text: String) -> void:
+	info_label.text = text

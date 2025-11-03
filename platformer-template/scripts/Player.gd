@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var speed := 220.0
 @export var jump_force := 500.0
 @export var gravity := 1000.0
+@export var invuln_time := 0.8
 
 # Carry / interact settings
 @export var kick_strength := 360.0
@@ -23,9 +24,11 @@ var _saved_mask := 0
 var _saved_gravity := 1.0
 var _facing := 1 # 1 = right, -1 = left
 
+var _invuln := false
+
 
 func _ready() -> void:
-	pass
+	Game.player_respawn.connect(_on_player_respawn)
 
 
 func _physics_process(delta: float) -> void:
@@ -145,3 +148,26 @@ func _push_rigid_bodies() -> void:
 				dir = -col.get_normal() * 120.0 # gentle nudge if standing
 			rb.apply_impulse(dir.normalized() * push_strength)
 			rb.sleeping = false
+
+
+func take_damage() -> void:
+	if _invuln:
+		return
+	_invuln = true
+	Game.damage_player()
+	flash_invuln()
+
+
+func flash_invuln() -> void:
+	# simple blink; non-blocking
+	var t := create_tween().set_loops(6)
+	t.tween_property(sprite, "modulate:a", 0.2, 0.06).from(1.0)
+	t.tween_property(sprite, "modulate:a", 1.0, 0.06)
+	await get_tree().create_timer(invuln_time).timeout
+	_invuln = false
+	sprite.modulate = Color(1, 1, 1, 1)
+
+
+func _on_player_respawn(pos: Vector2) -> void:
+	global_position = pos
+	velocity = Vector2.ZERO

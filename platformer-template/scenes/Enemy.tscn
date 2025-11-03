@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8siytdityf35"]
+[gd_scene load_steps=5 format=3 uid="uid://b8siytdityf35"]
 
 [ext_resource type="Script" uid="uid://bve7mbr8fguac" path="res://scripts/Enemy.gd" id="1_3gvst"]
 [ext_resource type="Texture2D" uid="uid://7o58y1e8th3w" path="res://icon.svg" id="2_55jtl"]
@@ -7,9 +7,6 @@
 atlas = ExtResource("2_55jtl")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2qkhh"]
-size = Vector2(12, 12)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3gvst"]
 size = Vector2(12, 12)
 
 [node name="Enemy" type="CharacterBody2D"]
@@ -23,9 +20,9 @@ texture = SubResource("AtlasTexture_mpr68")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2qkhh")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="WallCheck" type="RayCast2D" parent="."]
+target_position = Vector2(16, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_3gvst")
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[node name="LedgeCheck" type="RayCast2D" parent="."]
+position = Vector2(0, 0.4)
+target_position = Vector2(6, 20)

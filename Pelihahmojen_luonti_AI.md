@@ -6,7 +6,7 @@ Tämä ohje auttaa sinua tekemään pelihahmoja, taustoja ja esineitä AI-kuvage
 
 ---
 
-## ✅ Vaihe 1: Määrittele pelisi tyyli (laajennettu)
+## ✅ Vaihe 1: Määrittele pelisi tyyli
 
 Ennen kuin luot kuvia, päätä **pelisi visuaalinen tyyli**. Se tekee grafiikasta yhtenäisen.
 
@@ -177,7 +177,7 @@ Tarkista:
 
 ---
 
-## ✅ Vaihe 3: Luo animaatioruudut (laajennettu)
+## ✅ Vaihe 3: Luo animaatioruudut
 
 ### 🧩 A. Tavalliset animaatiot
 
